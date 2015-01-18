@@ -1,0 +1,214 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Freya</title>
+    <meta name="description" content="A functional-first web stack in F#">
+    <meta name="author" content="Andrew Cherry (@kolektiv) and Ryan Riley (@panesofglass)">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script src="//code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="//code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/theme/default.css" id="theme">
+    <link type="text/css" rel="stylesheet" href="fsharp.formatting/styles/style.css" />
+    <link type="text/css" rel="stylesheet" href="fsharp.formatting/styles/deedle.css" />
+    <script src="fsharp.formatting/styles/tips.js" type="text/javascript"></script>
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+    </script>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="reveal">
+        
+        <!-- Any section element inside of this container is displayed as a slide -->
+        <div class="slides">
+            <section >
+
+<section >
+
+<h1>Freya</h1>
+
+<h2>A functional-first web stack in F#</h2>
+
+<p>Andrew Cherry (@kolektiv)
+Ryan Riley (@panesofglass)</p>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<h2>(Optimistic) Contents</h2>
+
+<ul>
+<li>Introduction (5 mins)</li>
+<li><a href="http://owin.org/">OWIN</a> (5 mins)</li>
+<li>Freya Stack (10 mins)
+<ul>
+<li>Tour</li>
+<li>Lenses</li>
+</ul></li>
+<li>Todo Backend - Review (10 mins)</li>
+<li>Static File Server - Walkthrough (10 mins)</li>
+<li>Next / Questions (? mins)</li>
+</ul>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<h1>Introduction</h1>
+
+<h3>General Rambling</h3>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<h2>Who?</h2>
+
+<ul>
+<li>Andrew Cherry (<a href="https://twitter.com/kolektiv">@kolektiv</a>)</li>
+<li>Ryan Riley (<a href="https://twitter.com/panesofglass">@panesofglass</a>)</li>
+<li>... others? Collaboration is welcome!</li>
+</ul>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<h2>Ecosystem (F# Web)</h2>
+
+<ul>
+<li><a href="http://websharper.com/">WebSharper</a></li>
+<li><a href="http://suave.io/">Suave</a></li>
+<li><a href="http://frankfs.net/">Frank</a></li>
+<li><a href="https://github.com/frank-fs/taliesin">Taliesin</a></li>
+<li><a href="https://github.com/panesofglass/dyfrig">Dyfrig</a></li>
+<li>[other projects usable from F#, but implemented in "something else"]</li>
+<li>[other projects I've forgotten / not found]</li>
+</ul>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<h2>History</h2>
+
+<ul>
+<li>2010 - Frank - combinator library using <code>System.Net.Http</code> types</li>
+<li>2013 - Dyfrig - initial F# OWIN helpers, eventually became a small library</li>
+<li>2013 - Taliesin - OWIN routing middleware</li>
+<li>2014 - Frost - experiments in "machine" style web processing in F#</li>
+<li>...</li>
+</ul>
+
+<h2>2015 - Freya</h2>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<h2>Next for Freya</h2>
+
+<ul>
+<li>Full release! Very soon ...</li>
+<li>Inspectors / UI - in progress</li>
+<li>Documentation - also very soon!</li>
+<li><a href="http://github.com/freya-fs/freya">http://github.com/freya-fs/freya</a></li>
+</ul>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<h1>Questions?</h1>
+
+<h3>Point out my glaring category errors gently please</h3>
+
+</section>
+
+</section>
+
+
+
+        </div>
+    </div>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
+    <script>
+
+        // Full list of configuration options available here:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+
+            theme: 'night', // available themes are in /css/theme
+            transition: 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+            // Parallax scrolling
+            // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+            // parallaxBackgroundSize: '2100px 900px',
+
+            // Optional libraries used to extend on reveal.js
+            dependencies: [
+                { src: 'lib/js/classList.js', condition: function () { return !document.body.classList; } },
+                { src: 'plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: 'plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+                { src: 'plugin/zoom-js/zoom.js', async: true, condition: function () { return !!document.body.classList; } },
+                { src: 'plugin/notes/notes.js', async: true, condition: function () { return !!document.body.classList; } }
+            ]
+        });
+
+    </script>
+</body>
+</html>
+
