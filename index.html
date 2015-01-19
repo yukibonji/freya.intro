@@ -149,6 +149,297 @@
 
 <section >
 
+<h2>Naming</h2>
+
+<ul>
+<li>Dyfrig</li>
+<li>Taliesin</li>
+<li>...</li>
+<li>Common theme -- names that nobody can pronounce</li>
+<li>Alternative spelling "Freyja" rejected due to increasing self-awareness</li>
+</ul>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<h1>OWIN</h1>
+
+<p>Integration with existing standards, when possible</p>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<p><a href="http://owin.org/">OWIN</a></p>
+
+<ul>
+<li>Standard contract between servers and apps/frameworks</li>
+<li>Several server implementations, including IIS</li>
+<li>Low-level</li>
+<li>Lowest common denominator</li>
+<li>Reasonably well followed standard</li>
+</ul>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<h2>OWIN Design</h2>
+
+<ul>
+<li>OWIN design is very simple for historically meaningful (and not crazy) reasons</li>
+<li>All based on mutation and side effects, thus</li>
+<li>Not functional</li>
+<li>Uses simple types and works with any .NET language</li>
+</ul>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<h2>OWIN Design</h2>
+
+<ul>
+<li><code>Task</code>s (not <code>Task&lt;T&gt;</code>)</li>
+<li>Dictionary of state (<code>IDictionary&lt;string, obj&gt;</code>)</li>
+<li>Defined keys contain boxed objects of known types (some keys are optional)</li>
+<li>E.g., request headers are "owin.RequestHeaders" defined as an <code>IDictionary&lt;string, string[]&gt;</code></li>
+<li>Includes rules governing side effects in some cases</li>
+</ul>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<h2>OWIN Design</h2>
+
+<ul>
+<li>Servers should take action when certain elements in the environment dictionary change</li>
+<li>E.g., writing to the body stream, "owin.ResponseBody" typed as <code>System.IO.Stream</code>, flushes the headers, and you should no longer be able to write headers</li>
+<li>This design makes life difficult from the perspective of functional purity</li>
+</ul>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<h1>Freya Stack</h1>
+
+<p>A Tour</p>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<h2>Freya Architectural Principles</h2>
+
+<ul>
+<li>Build a stack rather than a monolithic framework</li>
+<li>Aim to make it easy to take components up to any level, and find them useful</li>
+<li>Aim to create a stack which is useful, but also a good set of building blocks for higher level abstractions</li>
+<li>Aim to make compatibility with non-Freya code simple (through adapters, mapping functions, etc. where sane)</li>
+</ul>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<h2>Freya "Ethical" Principles</h2>
+
+<ul>
+<li>Don't hide/smother existing abstractions</li>
+<li>HTTP is already a solid and well known abstraction -- work with if not against it</li>
+<li>Make it easy/trivial to do the right thing, and use the strengths of F# to make it hard/impossible to do the wrong thing</li>
+</ul>
+
+</section>
+
+</section>
+
+<section >
+
+<h2>(TODO: Stack Visual)</h2>
+
+</section>
+
+<section >
+
+<section >
+
+<h2><code>Freya.Core</code></h2>
+
+<ul>
+<li>Basic abstractions over OWIN</li>
+<li><code>freya</code> computation expression (the wrapping abstraction for our mutable state -- we will never speak of this in polite conversation)</li>
+<li>Set of operators to use <code>freya</code> computation expressions in a more concise way</li>
+<li>Some basic functions and <strong>lenses</strong> to give access to the state in a controllable way</li>
+</ul>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<h1>Lenses?</h1>
+
+<p>Quick glance at Lenses in code (if needed) ...</p>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<h2><code>Freya.Pipeline</code></h2>
+
+<ul>
+<li>Very small and simple -- all about composing <code>freya</code> computations in a way that represents a continue/halt processing pipeline</li>
+<li>A pipeline is simply a <code>freya</code> computation that returns <code>Next</code> or <code>Halt</code> (<code>FreyaPipelineChoice</code> cases)</li>
+<li>Single, simple operator: <code>&gt;?=</code></li>
+<li>If the pipeline returns <code>Next</code>, it will run the pipeline on the right, otherwise it will <code>Halt</code></li>
+</ul>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<h2><code>Freya.Recorder</code></h2>
+
+<ul>
+<li>Build introspection into the framework at a low level</li>
+<li>Provide some infrastructure for recording metadata about processing that more specific implemenations can use</li>
+<li>For example, <code>Freya.Machine</code> records the execution process so it can be examined later</li>
+</ul>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<h2><code>Freya.Types.*</code></h2>
+
+<ul>
+<li>Set of libraries providing F# types which map (very closely) to various specifications, such as HTTP, URI, LanguageTag, etc.</li>
+<li>These are used throughout the higher level stack projects</li>
+<li>Always favor strongly-typed representations of data over strings</li>
+<li>Provides parsers, formatters (statically on the types) and lenses from state to that type (either total or partial)</li>
+</ul>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<h2>Really?</h2>
+
+<ul>
+<li>Why not use <code>System.Net.Whatever</code>?</li>
+<li>Well ...</li>
+</ul>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<h2>Ask the <code>UriKind</code>.</h2>
+
+<h2>One. More. Time.</h2>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<h2><code>Freya.Types.*</code></h2>
+
+<ul>
+<li>Types and parsers for when you don't already know everything about the string you've been given</li>
+<li>Types which map closely to HTTP specifications</li>
+<li>Types which can distinguish between different kinds of URIs being valid in different places</li>
+<li>Types which can actually express languages that aren't "en-US"</li>
+<li>("hy-Latn-IT-arevela"? Of course we support Aremenian with a Latin script as spoken in Northern Italy why do you ask?)</li>
+</ul>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<h2><code>Freya.Router</code></h2>
+
+<ul>
+<li>A simple, trie-based router, does pretty much what you'd expect</li>
+<li>Has a cute computation expression syntax (<code>freyaRouter</code>)</li>
+<li>Doesn't try and do anything but route requests to pipelines</li>
+<li>(and is itself a pipeline -- everything's composable / nestable!)</li>
+</ul>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
 <h2><code>Freya.Machine</code></h2>
 
 <ul>
@@ -171,7 +462,8 @@
 <li>Every resource can essentially be modeled as a graph, or state machine, of how to respond to a request</li>
 <li>That graph can be configured by choosing to override certain aspects of it (decisions, handlers, etc.)</li>
 <li>Each resource is therefore the default graph, plus a set of overrides (and thus is a more "declarative" way of specifying how a resource should behave)</li>
-<li>Shall we look at the graph? Oh, go on then ...</li>
+<li>Shall we look at the graph? Oh, go on then ...
+fg</li>
 </ul>
 
 </section>
@@ -180,7 +472,7 @@
 
 <section >
 
-<h2><code>&lt;look at the pretty graph /&gt;</code></h2>
+<h2>Look at the Pretty Graph</h2>
 
 </section>
 
@@ -204,10 +496,11 @@
 
 <section >
 
-<h2><code>Freya.*.Inspector</code> (but not this, thanks)</h2>
+<h2><code>Freya.*.Inspector</code> (but not this, thankpan</h2>
 
 <ul>
-<li>Component specific extensions to the inspector, currently providing component specific JSON for the inspection API</li>
+<li>Component specific extensions to the inspector, currently providing component specific JSON for the inspects
+ion API</li>
 <li>Will provide UI extensions, too, but I haven't decided on the best approach to that (suggestions welcome, of course)</li>
 </ul>
 
@@ -217,7 +510,7 @@
 
 <section >
 
-<h2><code>&lt;look at the Freya source /&gt;</code></h2>
+<h2>Look at the Freya Source</h2>
 
 </section>
 
@@ -251,7 +544,7 @@
 
 <section >
 
-<h2><code>&lt;look at the todo backend source /&gt;</code></h2>
+<h2>Look at the Todo Backend Source</h2>
 
 </section>
 
@@ -284,7 +577,7 @@
 
 <section >
 
-<h2>&amp;lt;build a static file server /&amp;gt;</h2>
+<h2>Build a Static File Server</h2>
 
 </section>
 
@@ -307,13 +600,7 @@
 
 <section >
 
-<section >
-
 <h1>Questions?</h1>
-
-<p>Point out my glaring category errors gently please</p>
-
-</section>
 
 </section>
 
