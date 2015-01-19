@@ -149,6 +149,149 @@
 
 <section >
 
+<h2><code>Freya.Machine</code></h2>
+
+<ul>
+<li>A "machine" style resource definition / processing library</li>
+<li>Inspired by projects like web machine (Erlang) and Liberator (Clojure) but adding an F# twist (hint -- it's types again)</li>
+<li>Also has a cute computation expression syntax -- <code>freyaMachine</code> (or a terrible perversion of the point of CEs, depending on perspective)</li>
+</ul>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<h2>Machine Style Frameworks?</h2>
+
+<ul>
+<li>Every resource can essentially be modeled as a graph, or state machine, of how to respond to a request</li>
+<li>That graph can be configured by choosing to override certain aspects of it (decisions, handlers, etc.)</li>
+<li>Each resource is therefore the default graph, plus a set of overrides (and thus is a more "declarative" way of specifying how a resource should behave)</li>
+<li>Shall we look at the graph? Oh, go on then ...</li>
+</ul>
+
+</section>
+
+</section>
+
+<section >
+
+<h2>&amp;lt;look at the pretty graph /&amp;gt;</h2>
+
+</section>
+
+<section >
+
+<section >
+
+<h2><code>Freya.Inspector</code></h2>
+
+<ul>
+<li>Front-end to built-in introspection</li>
+<li>Has an extensibility model (well, half of one -- the very definition of "alpha" right now) allowing components to display component-specific data in suitable ways</li>
+<li>Right now provides an API; UI in-progress</li>
+</ul>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<h2><code>Freya.*.Inspector</code> (but not this, thanks)</h2>
+
+<ul>
+<li>Component specific extensions to the inspector, currently providing component specific JSON for the inspection API</li>
+<li>Will provide UI extensions, too, but I haven't decided on the best approach to that (suggestions welcome, of course)</li>
+</ul>
+
+</section>
+
+</section>
+
+<section >
+
+<h2>&amp;lt;look at the Freya source /&amp;gt;</h2>
+
+</section>
+
+<section >
+
+<section >
+
+<h1>Todo Backend</h1>
+
+<p>Review</p>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<h2>Todo Backend</h2>
+
+<ul>
+<li>A standard, simple "thing" to implement to help compare approaches</li>
+<li>Inspired by TodoMVC, for comparing front-end frameworks</li>
+<li>Here: <a href="http://todobackend.com/">http://todobackend.com/</a></li>
+</ul>
+
+</section>
+
+</section>
+
+<section >
+
+<h2>&amp;lt;look at the todo backend source /&amp;gt;</h2>
+
+</section>
+
+<section >
+
+<section >
+
+<h1>Static File Server</h1>
+
+<p>Walkthrough</p>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<h2>Static File Server</h2>
+
+<ul>
+<li>How do you approach building something using <code>Freya.*</code>?</li>
+<li>Let's build a tiny little static file server and see how to extend it (if we have time)</li>
+</ul>
+
+</section>
+
+</section>
+
+<section >
+
+<h2>&amp;lt;build a static file server /&amp;gt;</h2>
+
+</section>
+
+<section >
+
+<section >
+
 <h2>Next for Freya</h2>
 
 <ul>
