@@ -247,8 +247,9 @@ Quick glance at Lenses in code (if needed) ...
 
 ***
 
-## `Freya.*.Inspector` (but not this, thankpan
-* Component specific extensions to the inspector, currently providing component specific JSON for the inspects
+## `Freya.*.Inspector`
+
+* Component-specific extensions to the inspector, currently providing component specific JSON for the inspects
 ion API
 * Will provide UI extensions, too, but I haven't decided on the best approach to that (suggestions welcome, of course)
 
