@@ -232,7 +232,6 @@ Quick glance at Lenses in code (if needed) ...
 * That graph can be configured by choosing to override certain aspects of it (decisions, handlers, etc.)
 * Each resource is therefore the default graph, plus a set of overrides (and thus is a more "declarative" way of specifying how a resource should behave)
 * Shall we look at the graph? Oh, go on then ...
-fg
 
 ***
 
