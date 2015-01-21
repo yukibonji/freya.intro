@@ -44,6 +44,13 @@ open Freya.Core
 open Freya.Core.Operators
 open Freya.Pipeline
 open Freya.Pipeline.Operators
+open Freya.Types.Http
+open Freya.Machine
+open Freya.Router
+open Freya.Machine.Router
+open Freya.Inspector
+open Freya.Machine.Inspector
+open Freya.Router.Inspector
 open Swensen.Unquote
 
 (**
@@ -51,6 +58,8 @@ open Swensen.Unquote
 # Freya
 
 ## A functional web stack in F#
+
+![Freya logo]()
 
 ***
 
@@ -116,7 +125,7 @@ General Rambling
 
 # OWIN
 
-Integration with existing standards, when possible (more on this later)
+Integration with existing standards, when possible
 
 ***
 
@@ -390,7 +399,6 @@ let ``pipeline executes only the first monad if first halts`` () =
 ## `Freya.Router`
 
 * A simple, trie-based router, does pretty much what you'd expect
-* Has a cute computation expression syntax (`freyaRouter`)
 * Doesn't try and do anything but route requests to pipelines
 * (and is itself a pipeline -- everything's composable / nestable!)
 
@@ -399,28 +407,26 @@ let ``pipeline executes only the first monad if first halts`` () =
 ## `Freya.Machine`
 
 * A "machine" style resource definition / processing library
-* Inspired by projects like web machine (Erlang) and Liberator (Clojure) but adding an F# twist (hint -- it's types again)
-* Also has a cute computation expression syntax -- `freyaMachine` (or a terrible perversion of the point of CEs, depending on perspective)
+* Inspired by projects like webmachine (Erlang) and Liberator (Clojure)
+* Adds types
 
 ***
 
 ## Machine Style Frameworks?
 
-* Every resource can essentially be modeled as a graph, or state machine, of how to respond to a request
-* That graph can be configured by choosing to override certain aspects of it (decisions, handlers, etc.)
-* Each resource is therefore the default graph, plus a set of overrides (and thus is a more "declarative" way of specifying how a resource should behave)
-* Shall we look at the graph? Oh, go on then ...
+* Modeled as a graph, or state machine, of how to respond to a request
+* Configured by choosing to override certain aspects (decisions, handlers, etc.)
+* Each resource is therefore the default graph, plus a set of overrides
 
 ***
 
-## Look at the Pretty Graph
+![Freya visual debugging](images/graph.png)
 
 ***
 
 ## `Freya.Inspector`
 
-* Front-end to built-in introspection
-* Support visual debugging
+* Built-in introspection
 * Has an extensibility model (WIP)
 * Right now provides an API; UI in-progress
 
@@ -435,8 +441,6 @@ let ``pipeline executes only the first monad if first halts`` () =
 
 # Todo Backend
 
-Review
-
 ***
 
 ## Todo Backend
@@ -447,24 +451,22 @@ Review
 
 ***
 
-## Look at the Todo Backend Source
+## Demo: Todo Backend
 
 ***
 
 # Static File Server
-
-Walkthrough
 
 ***
 
 ## Static File Server
 
 * How do you approach building something using `Freya.*`?
-* Let's build a tiny little static file server and see how to extend it (if we have time)
+* Let's build a tiny little static file server and see how to extend it
 
 ***
 
-## Build a Static File Server
+## Demo: Static File Server
 
 ***
 
