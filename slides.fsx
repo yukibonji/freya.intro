@@ -50,11 +50,7 @@ open Swensen.Unquote
 
 # Freya
 
-## A functional-first web stack in F#
-
-Andrew Cherry (@kolektiv)
-
-Ryan Riley (@panesofglass)
+## A functional web stack in F#
 
 ***
 
@@ -134,16 +130,14 @@ Func<IDictionary<string, obj>, Task>
 
 * Standard contract between servers and apps/frameworks
 * Several server implementations, including IIS
-* Lowest common denominator
 * Reasonably well followed standard
 
 ***
 
 ## OWIN Design
 
-* OWIN design is very simple for historically meaningful (and not crazy) reasons
-* All based on mutation and side effects, thus
-* Not functional
+* OWIN design is very simple for [historically meaningful reasons](http://panesofglass.github.io/history-of-owin/)
+* Assumes mutation and side effects
 * Uses simple types and works with any .NET language
 
 ***
@@ -153,8 +147,8 @@ Func<IDictionary<string, obj>, Task>
 * `Task`s (not `Task<T>`)
 * Dictionary of state (`IDictionary<string, obj>`)
 * Defined keys contain boxed objects of known types (some keys are optional)
-* E.g., request headers are "owin.RequestHeaders" defined as an `IDictionary<string, string[]>`
-* Includes rules governing side effects in some cases
+  * e.g., request headers are "owin.RequestHeaders" defined as an `IDictionary<string, string[]>`
+  * spec includes rules governing side effects in some cases
 
 ***
 
@@ -174,18 +168,17 @@ A Tour
 
 ## Freya Architectural Principles
 
-* Build a stack rather than a monolithic framework
-* Aim to make it easy to take components up to any level, and find them useful
-* Aim to create a stack which is useful, but also a good set of building blocks for higher level abstractions
-* Aim to make compatibility with non-Freya code simple (through adapters, mapping functions, etc. where sane)
+* Stack rather than a monolithic framework
+* Building blocks for higher level abstractions
+* Compatibility with external libraries, e.g. existing OWIN middleware
 
 ***
 
 ## Freya "Ethical" Principles
 
-* Don't hide/smother existing abstractions
-* HTTP is already a solid and well known abstraction -- work with if not against it
-* Make it easy/trivial to do the right thing, and use the strengths of F# to make it hard/impossible to do the wrong thing
+* Work with and not against existing abstractions
+* Make it easy/trivial to do the right thing
+* Use the strengths of F# to make it hard/impossible to do the wrong thing
 
 ***
 
