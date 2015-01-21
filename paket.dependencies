@@ -4,3 +4,4 @@ nuget FAKE
 nuget FsReveal
 nuget Freya.Machine.Router
 nuget Freya.Router
+nuget Unquote

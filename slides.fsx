@@ -33,6 +33,7 @@
 #r "Freya.Machine/lib/net40/Freya.Machine.dll"
 #r "Freya.Router/lib/net40/Freya.Router.dll"
 #r "Freya.Machine.Router/lib/net40/Freya.Machine.Router.dll"
+#r "Unquote/lib/net40/Unquote.dll"
 
 open System
 open System.Collections.Generic
@@ -40,6 +41,10 @@ open System.Threading
 open System.Threading.Tasks
 open Owin
 open Freya.Core
+open Freya.Core.Operators
+open Freya.Pipeline
+open Freya.Pipeline.Operators
+open Swensen.Unquote
 
 (**
 
@@ -205,7 +210,8 @@ type Freya<'T> =
 Roughly equivalent to Erlang's webmachine signature:
 
 ```
-f(ReqData, State) -> {RetV, ReqData, State}.
+f(ReqData, State) ->
+    {RetV, ReqData, State}.
 ```
 
 ***
@@ -233,10 +239,26 @@ and FreyaMetaState =
 (**
 ***
 
-# Lenses?
+## Lenses?
 
-Quick glance at Lenses in code (if needed) ...
+*)
 
+let ``getLM, setLM, modLM behave correctly`` () =
+    let m =
+        freya {
+            do! setLM answerLens 42
+            let! v1 = getLM answerLens
+
+            do! modLM answerLens ((*) 2)
+            let! v2 = getLM answerLens
+
+            return v1, v2 }
+
+    let result = run m
+
+    fst result =? (42, 84)
+
+(**
 ***
 
 ## OWIN Integration
@@ -257,27 +279,47 @@ type OwinAppFunc =
 
 (**
 ***
-## Convert Freya to OWIN
+## Use OWIN in Freya
 *)
 
-let fromFreya (freya: Freya<_>) =
-  OwinAppFunc (fun e ->
-    async {
-      do! freya { Environment = e
-                  Meta = { Memos = Map.empty } } |> Async.Ignore }
-    |> Async.StartAsTask :> Task)
+let ``freya computation can compose with an OwinAppFunc`` () =
+    let app =
+        OwinAppFunc(fun (env: OwinEnvironment) ->
+            env.["Answer"] <- 42
+            Task.FromResult<obj>(null) :> Task)
+
+    let converted = OwinAppFunc.toFreya app
+
+    let m =
+        freya {
+            do! converted
+            let! v1 = getLM answerLens
+            return v1 }
+    
+    let result = run m
+    fst result =? 42
 
 (**
 ***
-## Convert OWIN to Freya
+## Convert Freya to OWIN
 *)
 
-let toFreya (app: OwinAppFunc) : Freya<unit> =
-  fun s -> async {
-    let { Environment = e; Meta = _ } = s
-    let! token = Async.CancellationToken
-    let! _ = app.Invoke(e).ContinueWith<unit>((fun t -> ()), token) |> Async.AwaitTask
-    return (), s }
+let ``freya computation can roundtrip to and from OwinAppFunc`` () =
+    let app = setLM answerLens 42
+
+    let converted =
+        app
+        |> OwinAppFunc.fromFreya
+        |> OwinAppFunc.toFreya
+
+    let m =
+        freya {
+            do! converted
+            let! v1 = getLM answerLens
+            return v1 }
+    
+    let result = run m
+    fst result =? 42
 
 (**
 ***
@@ -287,8 +329,31 @@ let toFreya (app: OwinAppFunc) : Freya<unit> =
 * Very small and simple -- all about composing `freya` computations in a way that represents a continue/halt processing pipeline
 * A pipeline is simply a `freya` computation that returns `Next` or `Halt` (`FreyaPipelineChoice` cases)
 * Single, simple operator: `>?=`
-* If the pipeline returns `Next`, it will run the pipeline on the right, otherwise it will `Halt`
 
+***
+*)
+
+let ``pipeline executes both monads if first returns next`` () =
+    let o1 = modM (fun x -> x.Environment.["o1"] <- true; x) *> next
+    let o2 = modM (fun x -> x.Environment.["o2"] <- true; x) *> next
+
+    let choice, env = run (o1 >?= o2)
+
+    choice =? Next
+    unbox env.Environment.["o1"] =? true
+    unbox env.Environment.["o2"] =? true
+
+let ``pipeline executes only the first monad if first halts`` () =
+    let o1 = modM (fun x -> x.Environment.["o1"] <- true; x) *> halt
+    let o2 = modM (fun x -> x.Environment.["o2"] <- true; x) *> next
+
+    let choice, env = run (o1 >?= o2)
+
+    choice =? Halt
+    unbox env.Environment.["o1"] =? true
+    unbox env.Environment.["o2"] =? false
+
+(**
 ***
 
 ## `Freya.Recorder`
@@ -362,20 +427,16 @@ let toFreya (app: OwinAppFunc) : Freya<unit> =
 ## `Freya.Inspector`
 
 * Front-end to built-in introspection
-* Has an extensibility model (well, half of one -- the very definition of "alpha" right now) allowing components to display component-specific data in suitable ways
+* Support visual debugging
+* Has an extensibility model (WIP)
 * Right now provides an API; UI in-progress
 
 ***
 
 ## `Freya.*.Inspector`
 
-* Component-specific extensions to the inspector, currently providing component specific JSON for the inspects
-ion API
-* Will provide UI extensions, too, but I haven't decided on the best approach to that (suggestions welcome, of course)
-
-***
-
-## Look at the Freya Source
+* Component-specific extensions to the inspector, currently providing component-specific JSON for the inspection API
+* Will provide UI extensions, too, but haven't decided on the best approach to that (suggestions welcome, of course)
 
 ***
 

@@ -86,3 +86,4 @@ NUGET
       ReadOnlyCollectionInterfaces (1.0.0) - net20, >= net35, >= net40
     ReadOnlyCollectionInterfaces (1.0.0)
     System.Json (4.0.20126.16343)
+    Unquote (2.2.2)
