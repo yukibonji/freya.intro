@@ -239,6 +239,49 @@ Quick glance at Lenses in code (if needed) ...
 
 ***
 
+## OWIN Integration
+
+*)
+
+/// Type alias of <see cref="FreyaEnvironment" /> in terms of OWIN.
+type OwinEnvironment =
+    FreyaEnvironment
+
+/// Type alias for the F# equivalent of the OWIN AppFunc signature.
+type OwinApp = 
+    OwinEnvironment -> Async<unit>
+
+/// Type alias for the OWIN AppFunc signature.
+type OwinAppFunc = 
+    Func<OwinEnvironment, Task>
+
+(**
+***
+## Convert Freya to OWIN
+*)
+
+let fromFreya (freya: Freya<_>) =
+  OwinAppFunc (fun e ->
+    async {
+      do! freya { Environment = e
+                  Meta = { Memos = Map.empty } } |> Async.Ignore }
+    |> Async.StartAsTask :> Task)
+
+(**
+***
+## Convert OWIN to Freya
+*)
+
+let toFreya (app: OwinAppFunc) : Freya<unit> =
+  fun s -> async {
+    let { Environment = e; Meta = _ } = s
+    let! token = Async.CancellationToken
+    let! _ = app.Invoke(e).ContinueWith<unit>((fun t -> ()), token) |> Async.AwaitTask
+    return (), s }
+
+(**
+***
+
 ## `Freya.Pipeline`
 
 * Very small and simple -- all about composing `freya` computations in a way that represents a continue/halt processing pipeline
