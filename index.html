@@ -104,6 +104,8 @@
 
 <h2>A functional web stack in F#</h2>
 
+<p><img src="" alt="Freya logo" /></p>
+
 </section>
 
 </section>
@@ -222,7 +224,7 @@
 
 <h1>OWIN</h1>
 
-<p>Integration with existing standards, when possible (more on this later)</p>
+<p>Integration with existing standards, when possible</p>
 
 </section>
 
@@ -789,7 +791,6 @@
 
 <ul>
 <li>A simple, trie-based router, does pretty much what you'd expect</li>
-<li>Has a cute computation expression syntax (<code>freyaRouter</code>)</li>
 <li>Doesn't try and do anything but route requests to pipelines</li>
 <li>(and is itself a pipeline -- everything's composable / nestable!)</li>
 </ul>
@@ -806,8 +807,8 @@
 
 <ul>
 <li>A "machine" style resource definition / processing library</li>
-<li>Inspired by projects like web machine (Erlang) and Liberator (Clojure) but adding an F# twist (hint -- it's types again)</li>
-<li>Also has a cute computation expression syntax -- <code>freyaMachine</code> (or a terrible perversion of the point of CEs, depending on perspective)</li>
+<li>Inspired by projects like webmachine (Erlang) and Liberator (Clojure)</li>
+<li>Adds types</li>
 </ul>
 
 </section>
@@ -821,10 +822,9 @@
 <h2>Machine Style Frameworks?</h2>
 
 <ul>
-<li>Every resource can essentially be modeled as a graph, or state machine, of how to respond to a request</li>
-<li>That graph can be configured by choosing to override certain aspects of it (decisions, handlers, etc.)</li>
-<li>Each resource is therefore the default graph, plus a set of overrides (and thus is a more "declarative" way of specifying how a resource should behave)</li>
-<li>Shall we look at the graph? Oh, go on then ...</li>
+<li>Modeled as a graph, or state machine, of how to respond to a request</li>
+<li>Configured by choosing to override certain aspects (decisions, handlers, etc.)</li>
+<li>Each resource is therefore the default graph, plus a set of overrides</li>
 </ul>
 
 </section>
@@ -833,7 +833,7 @@
 
 <section >
 
-<h2>Look at the Pretty Graph</h2>
+<p><img src="images/graph.png" alt="Freya visual debugging" /></p>
 
 </section>
 
@@ -844,8 +844,7 @@
 <h2><code>Freya.Inspector</code></h2>
 
 <ul>
-<li>Front-end to built-in introspection</li>
-<li>Support visual debugging</li>
+<li>Built-in introspection</li>
 <li>Has an extensibility model (WIP)</li>
 <li>Right now provides an API; UI in-progress</li>
 </ul>
@@ -871,13 +870,7 @@
 
 <section >
 
-<section >
-
 <h1>Todo Backend</h1>
-
-<p>Review</p>
-
-</section>
 
 </section>
 
@@ -899,19 +892,13 @@
 
 <section >
 
-<h2>Look at the Todo Backend Source</h2>
+<h2>Demo: Todo Backend</h2>
 
 </section>
-
-<section >
 
 <section >
 
 <h1>Static File Server</h1>
-
-<p>Walkthrough</p>
-
-</section>
 
 </section>
 
@@ -923,7 +910,7 @@
 
 <ul>
 <li>How do you approach building something using <code>Freya.*</code>?</li>
-<li>Let's build a tiny little static file server and see how to extend it (if we have time)</li>
+<li>Let's build a tiny little static file server and see how to extend it</li>
 </ul>
 
 </section>
@@ -932,7 +919,7 @@
 
 <section >
 
-<h2>Build a Static File Server</h2>
+<h2>Demo: Static File Server</h2>
 
 </section>
 
