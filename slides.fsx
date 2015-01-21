@@ -197,15 +197,20 @@ A Tour
 
 ***
 *)
+
 type Freya<'T> =
     FreyaState -> Async<'T * FreyaState>
 (**
 
 Roughly equivalent to Erlang's webmachine signature:
 
-```f(ReqData, State) -> {RetV, ReqData, State}.```
+```
+f(ReqData, State) -> {RetV, ReqData, State}.
+```
+
 ***
 *)
+
 type FreyaState =
     { Environment: FreyaEnvironment
       Meta: FreyaMetaState }
@@ -224,6 +229,7 @@ and FreyaMetaState =
     static member internal MemosLens =
         (fun x -> x.Memos),
         (fun m x -> { x with Memos = m })
+
 (**
 ***
 
