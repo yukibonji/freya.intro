@@ -1,3 +1,4 @@
+(**
 - title : Freya
 - description : A functional-first web stack in F#
 - author : Andrew Cherry (@kolektiv) and Ryan Riley (@panesofglass)
@@ -5,6 +6,16 @@
 - transition : default
 
 ***
+
+*)
+
+(*** hide ***)
+#I "../packages"
+#r "Owin/lib/net40/owin.dll"
+
+open Owin
+
+(**
 
 # Freya
 
@@ -303,3 +314,5 @@ Walkthrough
 ***
 
 # Questions?
+
+*)

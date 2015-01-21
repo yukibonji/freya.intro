@@ -14,6 +14,6 @@ let copyFiles() =
 open FsReveal
 
 let outDir = Path.Combine(__SOURCE_DIRECTORY__, "output")
-let inputFsx = Path.Combine( __SOURCE_DIRECTORY__, "slides.md")
-FsReveal.GenerateOutputFromMarkdownFile outDir "index.html" inputFsx
+let inputFsx = Path.Combine( __SOURCE_DIRECTORY__, "slides.fsx")
+FsReveal.GenerateOutputFromScriptFile outDir "index.html" inputFsx
 copyFiles()
