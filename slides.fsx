@@ -11,9 +11,35 @@
 
 (*** hide ***)
 #I "../packages"
+#r "Aether/lib/net40/Aether.dll"
+#r "System.Json/lib/net40/System.Json.dll"
+#r "ReadOnlyCollectionInterfaces/lib/NET40-client/ReadOnlyCollectionInterfaces.dll"
+#r "ReadOnlyCollectionExtensions/lib/NET40-client/ReadOnlyCollectionExtensions.dll"
+#r "LinqBridge/lib/net20/LinqBridge.dll"
+#r "FsControl/lib/net40/FsControl.Core.dll"
+#r "FSharpPlus/lib/net40/FSharpPlus.dll"
+#r "Fleece/lib/NET40/Fleece.dll"
+#r "FParsec/lib/net40-client/FParsecCS.dll"
+#r "FParsec/lib/net40-client/FParsec.dll"
 #r "Owin/lib/net40/owin.dll"
+#r "Freya.Core/lib/net40/Freya.Core.dll"
+#r "Freya.Pipeline/lib/net40/Freya.Pipeline.dll"
+#r "Freya.Recorder/lib/net40/Freya.Recorder.dll"
+#r "Freya.Types/lib/net40/Freya.Types.dll"
+#r "Freya.Types.Uri/lib/net40/Freya.Types.Uri.dll"
+#r "Freya.Types.Language/lib/net40/Freya.Types.Language.dll"
+#r "Freya.Types.Http/lib/net40/Freya.Types.Http.dll"
+#r "Freya.Types.Cors/lib/net40/Freya.Types.Cors.dll"
+#r "Freya.Machine/lib/net40/Freya.Machine.dll"
+#r "Freya.Router/lib/net40/Freya.Router.dll"
+#r "Freya.Machine.Router/lib/net40/Freya.Machine.Router.dll"
 
+open System
+open System.Collections.Generic
+open System.Threading
+open System.Threading.Tasks
 open Owin
+open Freya.Core
 
 (**
 
@@ -89,15 +115,20 @@ General Rambling
 
 # OWIN
 
-Integration with existing standards, when possible
+Integration with existing standards, when possible (more on this later)
 
 ***
 
 ## [OWIN](http://owin.org/)
 
+*)
+
+Func<IDictionary<string, obj>, Task>
+
+(**
+
 * Standard contract between servers and apps/frameworks
 * Several server implementations, including IIS
-* Low-level
 * Lowest common denominator
 * Reasonably well followed standard
 
@@ -164,6 +195,36 @@ A Tour
 * Set of operators to use `freya` computation expressions in a more concise way
 * Some basic functions and **lenses** to give access to the state in a controllable way
 
+***
+*)
+type Freya<'T> =
+    FreyaState -> Async<'T * FreyaState>
+(**
+
+Roughly equivalent to Erlang's webmachine signature:
+
+```f(ReqData, State) -> {RetV, ReqData, State}.```
+***
+*)
+type FreyaState =
+    { Environment: FreyaEnvironment
+      Meta: FreyaMetaState }
+
+    static member internal EnvironmentLens =
+        (fun x -> x.Environment), 
+        (fun e x -> { x with Environment = e })
+
+    static member internal MetaLens =
+        (fun x -> x.Meta), 
+        (fun m x -> { x with Meta = m })
+
+and FreyaMetaState =
+    { Memos: Map<Guid, obj> }
+
+    static member internal MemosLens =
+        (fun x -> x.Memos),
+        (fun m x -> { x with Memos = m })
+(**
 ***
 
 # Lenses?
