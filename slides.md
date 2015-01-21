@@ -142,7 +142,7 @@ A Tour
 
 ***
 
-## (TODO: Stack Visual)
+![Freya stack](images/freya-stack.png)
 
 ***
 
@@ -194,8 +194,7 @@ Quick glance at Lenses in code (if needed) ...
 
 ***
 
-## Ask the `UriKind`.
-## One. More. Time.
+![Ask the UriKind. One. More. Time.](images/ask-the-urikind.png)
 
 ***
 
