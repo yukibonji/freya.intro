@@ -102,11 +102,7 @@
 
 <h1>Freya</h1>
 
-<h2>A functional-first web stack in F#</h2>
-
-<p>Andrew Cherry (@kolektiv)</p>
-
-<p>Ryan Riley (@panesofglass)</p>
+<h2>A functional web stack in F#</h2>
 
 </section>
 
@@ -251,7 +247,6 @@
 <ul>
 <li>Standard contract between servers and apps/frameworks</li>
 <li>Several server implementations, including IIS</li>
-<li>Lowest common denominator</li>
 <li>Reasonably well followed standard</li>
 </ul>
 
@@ -266,9 +261,8 @@
 <h2>OWIN Design</h2>
 
 <ul>
-<li>OWIN design is very simple for historically meaningful (and not crazy) reasons</li>
-<li>All based on mutation and side effects, thus</li>
-<li>Not functional</li>
+<li>OWIN design is very simple for <a href="http://panesofglass.github.io/history-of-owin/">historically meaningful reasons</a></li>
+<li>Assumes mutation and side effects</li>
 <li>Uses simple types and works with any .NET language</li>
 </ul>
 
@@ -285,9 +279,11 @@
 <ul>
 <li><code>Task</code>s (not <code>Task&lt;T&gt;</code>)</li>
 <li>Dictionary of state (<code>IDictionary&lt;string, obj&gt;</code>)</li>
-<li>Defined keys contain boxed objects of known types (some keys are optional)</li>
-<li>E.g., request headers are "owin.RequestHeaders" defined as an <code>IDictionary&lt;string, string[]&gt;</code></li>
-<li>Includes rules governing side effects in some cases</li>
+<li>Defined keys contain boxed objects of known types (some keys are optional)
+<ul>
+<li>e.g., request headers are "owin.RequestHeaders" defined as an <code>IDictionary&lt;string, string[]&gt;</code></li>
+<li>spec includes rules governing side effects in some cases</li>
+</ul></li>
 </ul>
 
 </section>
@@ -329,10 +325,9 @@
 <h2>Freya Architectural Principles</h2>
 
 <ul>
-<li>Build a stack rather than a monolithic framework</li>
-<li>Aim to make it easy to take components up to any level, and find them useful</li>
-<li>Aim to create a stack which is useful, but also a good set of building blocks for higher level abstractions</li>
-<li>Aim to make compatibility with non-Freya code simple (through adapters, mapping functions, etc. where sane)</li>
+<li>Stack rather than a monolithic framework</li>
+<li>Building blocks for higher level abstractions</li>
+<li>Compatibility with external libraries, e.g. existing OWIN middleware</li>
 </ul>
 
 </section>
@@ -346,9 +341,9 @@
 <h2>Freya "Ethical" Principles</h2>
 
 <ul>
-<li>Don't hide/smother existing abstractions</li>
-<li>HTTP is already a solid and well known abstraction -- work with if not against it</li>
-<li>Make it easy/trivial to do the right thing, and use the strengths of F# to make it hard/impossible to do the wrong thing</li>
+<li>Work with and not against existing abstractions</li>
+<li>Make it easy/trivial to do the right thing</li>
+<li>Use the strengths of F# to make it hard/impossible to do the wrong thing</li>
 </ul>
 
 </section>
