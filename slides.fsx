@@ -1,5 +1,5 @@
 (**
-- title : Freya
+- title : Relax and Let the HTTP Machine do the Work
 - description : A functional-first web stack in F#
 - author : Andrew Cherry (@kolektiv) and Ryan Riley (@panesofglass)
 - theme : night
@@ -55,6 +55,61 @@ open Swensen.Unquote
 
 (**
 
+# Relax and let the HTTP Machine do the Work
+
+## [Andrew Cherry](https://twitter.com/kolektiv) and [Ryan Riley](https://twitter.com/panesofglass)
+
+***
+
+## Contents
+
+* Problem
+* Solution
+* Freya
+* Examples
+* Questions
+
+***
+
+# HTTP is Hard
+
+***
+
+![HTTP State Machine]()
+
+***
+
+## What's Wrong with Existing Solutions?
+
+* Syntactic sugar over a dictionary of request handlers
+* Manual response handling selection and control
+* Weak support for most of HTTP
+* Little to no enforcement of HTTP RFC requirements
+* Leads to team disagreements and other silliness
+
+***
+
+# Better Solution
+
+## Machine-style Frameworks
+
+* Webmachine (Erlang and Ruby)
+* Liberator (Clojure)
+
+***
+
+## Machine-style Frameworks?
+
+* Modeled as a graph, or state machine, of how to respond to a request
+* Configured by choosing to override certain aspects:
+  * decisions
+  * handlers
+  * content negotiation
+  * etc.
+* Each resource is therefore the default graph plus a set of overrides
+
+***
+
 # Freya
 
 ## A functional web stack in F#
@@ -63,73 +118,26 @@ open Swensen.Unquote
 
 ***
 
-## (Optimistic) Contents
+## Architectural Principles
 
-* Introduction (5 mins)
-* [OWIN](http://owin.org/) (5 mins)
-* Freya Stack (10 mins)
-  * Tour
-  * Lenses
-* Todo Backend - Review (10 mins)
-* Static File Server - Walkthrough (10 mins)
-* Next / Questions (? mins)
+* Stack rather than a monolithic framework
+* Building blocks for higher level abstractions
+* Compatibility with external libraries, e.g. existing OWIN middleware
 
 ***
 
-# Introduction
+## "Ethical" Principles
 
-General Rambling
+* Work with and not against existing abstractions
+* Make it easy/trivial to do the right thing
+* Use the strengths of F# to make it hard/impossible to do the wrong thing
 
-***
-
-## Who?
-
-* Andrew Cherry ([@kolektiv](https://twitter.com/kolektiv))
-* Ryan Riley ([@panesofglass](https://twitter.com/panesofglass))
-* ... others? Collaboration is welcome!
 
 ***
 
-## Ecosystem (F# Web)
+## Integration with existing standards
 
-* [WebSharper](http://websharper.com/)
-* [Suave](http://suave.io/)
-* [Frank](http://frankfs.net/)
-* [Taliesin](https://github.com/frank-fs/taliesin)
-* [Dyfrig](https://github.com/panesofglass/dyfrig)
-* [other projects usable from F#, but implemented in "something else"]
-* [other projects I've forgotten / not found]
-
-***
-
-## History
-
-* **2010 - Frank** - combinator library using `System.Net.Http` types
-* **2013 - Dyfrig** - initial F# OWIN helpers, eventually became a small library
-* **2013 - Taliesin** - OWIN routing middleware
-* **2014 - Frost** - experiments in "machine" style web processing in F#
-* ...
-* **2015 - Freya**
-
-***
-
-## Naming
-
-* Dyfrig
-* Taliesin
-* ...
-* Common theme -- names that nobody can pronounce
-* Alternative spelling "Freyja" rejected due to increasing self-awareness
-
-***
-
-# OWIN
-
-Integration with existing standards, when possible
-
-***
-
-## [OWIN](http://owin.org/)
+[OWIN](http://owin.org/)
 
 *)
 
@@ -143,51 +151,9 @@ Func<IDictionary<string, obj>, Task>
 
 ***
 
-## OWIN Design
-
-* OWIN design is very simple for [historically meaningful reasons](http://panesofglass.github.io/history-of-owin/)
-* Assumes mutation and side effects
-* Uses simple types and works with any .NET language
-
-***
-
-## OWIN Design
-
-* `Task`s (not `Task<T>`)
-* Dictionary of state (`IDictionary<string, obj>`)
-* Defined keys contain boxed objects of known types (some keys are optional)
-  * e.g., request headers are "owin.RequestHeaders" defined as an `IDictionary<string, string[]>`
-  * spec includes rules governing side effects in some cases
-
-***
-
-## OWIN Design
-
-* Servers should take action when certain elements in the environment dictionary change
-* E.g., writing to the body stream, "owin.ResponseBody" typed as `System.IO.Stream`, flushes the headers, and you should no longer be able to write headers
-* This design makes life difficult from the perspective of functional purity
-
-***
-
 # Freya Stack
 
 A Tour
-
-***
-
-## Freya Architectural Principles
-
-* Stack rather than a monolithic framework
-* Building blocks for higher level abstractions
-* Compatibility with external libraries, e.g. existing OWIN middleware
-
-***
-
-## Freya "Ethical" Principles
-
-* Work with and not against existing abstractions
-* Make it easy/trivial to do the right thing
-* Use the strengths of F# to make it hard/impossible to do the wrong thing
 
 ***
 
@@ -412,13 +378,7 @@ let ``pipeline executes only the first monad if first halts`` () =
 
 ***
 
-## Machine Style Frameworks?
-
-* Modeled as a graph, or state machine, of how to respond to a request
-* Configured by choosing to override certain aspects (decisions, handlers, etc.)
-* Each resource is therefore the default graph, plus a set of overrides
-
-***
+## Tracing with Inspectors
 
 ![Freya visual debugging](images/graph.png)
 
@@ -480,5 +440,31 @@ let ``pipeline executes only the first monad if first halts`` () =
 ***
 
 # Questions?
+
+***
+
+## OWIN Design
+
+* OWIN design is very simple for [historically meaningful reasons](http://panesofglass.github.io/history-of-owin/)
+* Assumes mutation and side effects
+* Uses simple types and works with any .NET language
+
+***
+
+## OWIN Design
+
+* `Task`s (not `Task<T>`)
+* Dictionary of state (`IDictionary<string, obj>`)
+* Defined keys contain boxed objects of known types (some keys are optional)
+  * e.g., request headers are "owin.RequestHeaders" defined as an `IDictionary<string, string[]>`
+  * spec includes rules governing side effects in some cases
+
+***
+
+## OWIN Design
+
+* Servers should take action when certain elements in the environment dictionary change
+* E.g., writing to the body stream, "owin.ResponseBody" typed as `System.IO.Stream`, flushes the headers, and you should no longer be able to write headers
+* This design makes life difficult from the perspective of functional purity
 
 *)
