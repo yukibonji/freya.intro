@@ -59,7 +59,7 @@ open Swensen.Unquote
 
 ## A functional web stack in F#
 
-![Freya logo]()
+<img src="images/freya.svg" alt="Freya logo" height="300px" width="300px" style="background-color:#fff;" />
 
 ***
 
