@@ -12,27 +12,26 @@
 (*** hide ***)
 #I "../packages"
 #r "Aether/lib/net40/Aether.dll"
-#r "System.Json/lib/net40/System.Json.dll"
-#r "ReadOnlyCollectionInterfaces/lib/NET40-client/ReadOnlyCollectionInterfaces.dll"
-#r "ReadOnlyCollectionExtensions/lib/NET40-client/ReadOnlyCollectionExtensions.dll"
-#r "LinqBridge/lib/net20/LinqBridge.dll"
-#r "FsControl/lib/net40/FsControl.Core.dll"
-#r "FSharpPlus/lib/net40/FSharpPlus.dll"
-#r "Fleece/lib/NET40/Fleece.dll"
+#r "Hekate/lib/net40/Hekate.dll"
 #r "FParsec/lib/net40-client/FParsecCS.dll"
 #r "FParsec/lib/net40-client/FParsec.dll"
+#r "Chiron/lib/net40/Chiron.dll"
 #r "Owin/lib/net40/owin.dll"
-#r "Freya.Core/lib/net40/Freya.Core.dll"
-#r "Freya.Pipeline/lib/net40/Freya.Pipeline.dll"
-#r "Freya.Recorder/lib/net40/Freya.Recorder.dll"
-#r "Freya.Types/lib/net40/Freya.Types.dll"
-#r "Freya.Types.Uri/lib/net40/Freya.Types.Uri.dll"
-#r "Freya.Types.Language/lib/net40/Freya.Types.Language.dll"
-#r "Freya.Types.Http/lib/net40/Freya.Types.Http.dll"
-#r "Freya.Types.Cors/lib/net40/Freya.Types.Cors.dll"
-#r "Freya.Machine/lib/net40/Freya.Machine.dll"
-#r "Freya.Router/lib/net40/Freya.Router.dll"
-#r "Freya.Machine.Router/lib/net40/Freya.Machine.Router.dll"
+#r "Freya.Core/lib/net45/Freya.Core.dll"
+#r "Freya.Pipeline/lib/net45/Freya.Pipeline.dll"
+#r "Freay.Integration/lib/net45/Freya.Integration.dll"
+#r "Freya.Recorder/lib/net45/Freya.Recorder.dll"
+#r "Freya.Types/lib/net45/Freya.Types.dll"
+#r "Freya.Types.Uri/lib/net45/Freya.Types.Uri.dll"
+#r "Freya.Types.Uri.Template/lib/net45/Freya.Types.Uri.Template.dll"
+#r "Freya.Types.Language/lib/net45/Freya.Types.Language.dll"
+#r "Freya.Types.Http/lib/net45/Freya.Types.Http.dll"
+#r "Freya.Types.Http.Cors/lib/net45/Freya.Types.Http.Cors.dll"
+#r "Freya.Machine/lib/net45/Freya.Machine.dll"
+#r "Freya.Machine.Extensions.Http/lib/net45/Freya.Machine.Extensions.Http.dll"
+#r "Freya.Machine.Extensions.Http.Cors/lib/net45/Freya.Machine.Extensions.Http.Cors.dll"
+#r "Freya.Router/lib/net45/Freya.Router.dll"
+#r "Freya.Machine.Router/lib/net45/Freya.Machine.Router.dll"
 #r "Unquote/lib/net40/Unquote.dll"
 
 open System
@@ -89,7 +88,16 @@ open Swensen.Unquote
 
 ***
 
-# Better Solution
+## Prior Attempts (in F#)
+
+* [Frank](https://github.com/frank-fs/frank)
+* [Dyfrig](https://github.com/panesofglass/dyfrig)
+* [Taliesin](https://github.com/frank-fs/taliesin)
+* [Frost](https://github.com/kolektiv/frost)
+
+***
+
+# A Better Solution
 
 ## Machine-style Frameworks
 
