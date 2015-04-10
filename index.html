@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Freya</title>
+    <title>Relax and Let the HTTP Machine do the Work</title>
     <meta name="description" content="A functional-first web stack in F#">
     <meta name="author" content="Andrew Cherry (@kolektiv) and Ryan Riley (@panesofglass)">
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -100,11 +100,127 @@
 
 <section >
 
+<h1>Relax and let the HTTP Machine do the Work</h1>
+
+<h2><a href="https://twitter.com/kolektiv">Andrew Cherry</a> and <a href="https://twitter.com/panesofglass">Ryan Riley</a></h2>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<h2>Contents</h2>
+
+<ul>
+<li>Problem</li>
+<li>Solution</li>
+<li>Freya</li>
+<li>Examples</li>
+<li>Questions</li>
+</ul>
+
+</section>
+
+</section>
+
+<section >
+
+<h1>HTTP is Hard</h1>
+
+</section>
+
+<section >
+
+<p><img src="" alt="HTTP State Machine" /></p>
+
+</section>
+
+<section >
+
+<section >
+
+<h2>What's Wrong with Existing Solutions?</h2>
+
+<ul>
+<li>Syntactic sugar over a dictionary of request handlers</li>
+<li>Manual response handling selection and control</li>
+<li>Weak support for most of HTTP</li>
+<li>Little to no enforcement of HTTP RFC requirements</li>
+<li>Leads to team disagreements and other silliness</li>
+</ul>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<h2>Prior Attempts (in F#)</h2>
+
+<ul>
+<li><a href="https://github.com/frank-fs/frank">Frank</a></li>
+<li><a href="https://github.com/panesofglass/dyfrig">Dyfrig</a></li>
+<li><a href="https://github.com/frank-fs/taliesin">Taliesin</a></li>
+<li><a href="https://github.com/kolektiv/frost">Frost</a></li>
+</ul>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<h1>A Better Solution</h1>
+
+<h2>Machine-style Frameworks</h2>
+
+<ul>
+<li>Webmachine (Erlang and Ruby)</li>
+<li>Liberator (Clojure)</li>
+</ul>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<h2>Machine-style Frameworks?</h2>
+
+<ul>
+<li>Modeled as a graph, or state machine, of how to respond to a request</li>
+<li>Configured by choosing to override certain aspects:
+<ul>
+<li>decisions</li>
+<li>handlers</li>
+<li>content negotiation</li>
+<li>etc.</li>
+</ul></li>
+<li>Each resource is therefore the default graph plus a set of overrides</li>
+</ul>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
 <h1>Freya</h1>
 
 <h2>A functional web stack in F#</h2>
 
-<p><img src="" alt="Freya logo" /></p>
+<img src="images/freya.svg" alt="Freya logo" height="300px" width="300px" style="background-color:#fff;" />
 
 </section>
 
@@ -114,19 +230,12 @@
 
 <section >
 
-<h2>(Optimistic) Contents</h2>
+<h2>Architectural Principles</h2>
 
 <ul>
-<li>Introduction (5 mins)</li>
-<li><a href="http://owin.org/">OWIN</a> (5 mins)</li>
-<li>Freya Stack (10 mins)
-<ul>
-<li>Tour</li>
-<li>Lenses</li>
-</ul></li>
-<li>Todo Backend - Review (10 mins)</li>
-<li>Static File Server - Walkthrough (10 mins)</li>
-<li>Next / Questions (? mins)</li>
+<li>Stack rather than a monolithic framework</li>
+<li>Building blocks for higher level abstractions</li>
+<li>Compatibility with external libraries, e.g. existing OWIN middleware</li>
 </ul>
 
 </section>
@@ -137,24 +246,12 @@
 
 <section >
 
-<h1>Introduction</h1>
-
-<p>General Rambling</p>
-
-</section>
-
-</section>
-
-<section >
-
-<section >
-
-<h2>Who?</h2>
+<h2>"Ethical" Principles</h2>
 
 <ul>
-<li>Andrew Cherry (<a href="https://twitter.com/kolektiv">@kolektiv</a>)</li>
-<li>Ryan Riley (<a href="https://twitter.com/panesofglass">@panesofglass</a>)</li>
-<li>... others? Collaboration is welcome!</li>
+<li>Work with and not against existing abstractions</li>
+<li>Make it easy/trivial to do the right thing</li>
+<li>Use the strengths of F# to make it hard/impossible to do the wrong thing</li>
 </ul>
 
 </section>
@@ -165,76 +262,9 @@
 
 <section >
 
-<h2>Ecosystem (F# Web)</h2>
+<h2>Integration with existing standards</h2>
 
-<ul>
-<li><a href="http://websharper.com/">WebSharper</a></li>
-<li><a href="http://suave.io/">Suave</a></li>
-<li><a href="http://frankfs.net/">Frank</a></li>
-<li><a href="https://github.com/frank-fs/taliesin">Taliesin</a></li>
-<li><a href="https://github.com/panesofglass/dyfrig">Dyfrig</a></li>
-<li>[other projects usable from F#, but implemented in "something else"]</li>
-<li>[other projects I've forgotten / not found]</li>
-</ul>
-
-</section>
-
-</section>
-
-<section >
-
-<section >
-
-<h2>History</h2>
-
-<ul>
-<li><strong>2010 - Frank</strong> - combinator library using <code>System.Net.Http</code> types</li>
-<li><strong>2013 - Dyfrig</strong> - initial F# OWIN helpers, eventually became a small library</li>
-<li><strong>2013 - Taliesin</strong> - OWIN routing middleware</li>
-<li><strong>2014 - Frost</strong> - experiments in "machine" style web processing in F#</li>
-<li>...</li>
-<li><strong>2015 - Freya</strong></li>
-</ul>
-
-</section>
-
-</section>
-
-<section >
-
-<section >
-
-<h2>Naming</h2>
-
-<ul>
-<li>Dyfrig</li>
-<li>Taliesin</li>
-<li>...</li>
-<li>Common theme -- names that nobody can pronounce</li>
-<li>Alternative spelling "Freyja" rejected due to increasing self-awareness</li>
-</ul>
-
-</section>
-
-</section>
-
-<section >
-
-<section >
-
-<h1>OWIN</h1>
-
-<p>Integration with existing standards, when possible</p>
-
-</section>
-
-</section>
-
-<section >
-
-<section >
-
-<h2><a href="http://owin.org/">OWIN</a></h2>
+<p><a href="http://owin.org/">OWIN</a></p>
 
 <table class="pre"><tr><td class="lines"><pre class="fssnip">
 <span class="l">1: </span>
@@ -260,93 +290,9 @@
 
 <section >
 
-<h2>OWIN Design</h2>
-
-<ul>
-<li>OWIN design is very simple for <a href="http://panesofglass.github.io/history-of-owin/">historically meaningful reasons</a></li>
-<li>Assumes mutation and side effects</li>
-<li>Uses simple types and works with any .NET language</li>
-</ul>
-
-</section>
-
-</section>
-
-<section >
-
-<section >
-
-<h2>OWIN Design</h2>
-
-<ul>
-<li><code>Task</code>s (not <code>Task&lt;T&gt;</code>)</li>
-<li>Dictionary of state (<code>IDictionary&lt;string, obj&gt;</code>)</li>
-<li>Defined keys contain boxed objects of known types (some keys are optional)
-<ul>
-<li>e.g., request headers are "owin.RequestHeaders" defined as an <code>IDictionary&lt;string, string[]&gt;</code></li>
-<li>spec includes rules governing side effects in some cases</li>
-</ul></li>
-</ul>
-
-</section>
-
-</section>
-
-<section >
-
-<section >
-
-<h2>OWIN Design</h2>
-
-<ul>
-<li>Servers should take action when certain elements in the environment dictionary change</li>
-<li>E.g., writing to the body stream, "owin.ResponseBody" typed as <code>System.IO.Stream</code>, flushes the headers, and you should no longer be able to write headers</li>
-<li>This design makes life difficult from the perspective of functional purity</li>
-</ul>
-
-</section>
-
-</section>
-
-<section >
-
-<section >
-
 <h1>Freya Stack</h1>
 
 <p>A Tour</p>
-
-</section>
-
-</section>
-
-<section >
-
-<section >
-
-<h2>Freya Architectural Principles</h2>
-
-<ul>
-<li>Stack rather than a monolithic framework</li>
-<li>Building blocks for higher level abstractions</li>
-<li>Compatibility with external libraries, e.g. existing OWIN middleware</li>
-</ul>
-
-</section>
-
-</section>
-
-<section >
-
-<section >
-
-<h2>Freya "Ethical" Principles</h2>
-
-<ul>
-<li>Work with and not against existing abstractions</li>
-<li>Make it easy/trivial to do the right thing</li>
-<li>Use the strengths of F# to make it hard/impossible to do the wrong thing</li>
-</ul>
 
 </section>
 
@@ -819,21 +765,11 @@
 
 <section >
 
-<h2>Machine Style Frameworks?</h2>
-
-<ul>
-<li>Modeled as a graph, or state machine, of how to respond to a request</li>
-<li>Configured by choosing to override certain aspects (decisions, handlers, etc.)</li>
-<li>Each resource is therefore the default graph, plus a set of overrides</li>
-</ul>
-
-</section>
-
-</section>
-
-<section >
+<h2>Tracing with Inspectors</h2>
 
 <p><img src="images/graph.png" alt="Freya visual debugging" /></p>
+
+</section>
 
 </section>
 
@@ -943,6 +879,58 @@
 <section >
 
 <h1>Questions?</h1>
+
+</section>
+
+<section >
+
+<section >
+
+<h2>OWIN Design</h2>
+
+<ul>
+<li>OWIN design is very simple for <a href="http://panesofglass.github.io/history-of-owin/">historically meaningful reasons</a></li>
+<li>Assumes mutation and side effects</li>
+<li>Uses simple types and works with any .NET language</li>
+</ul>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<h2>OWIN Design</h2>
+
+<ul>
+<li><code>Task</code>s (not <code>Task&lt;T&gt;</code>)</li>
+<li>Dictionary of state (<code>IDictionary&lt;string, obj&gt;</code>)</li>
+<li>Defined keys contain boxed objects of known types (some keys are optional)
+<ul>
+<li>e.g., request headers are "owin.RequestHeaders" defined as an <code>IDictionary&lt;string, string[]&gt;</code></li>
+<li>spec includes rules governing side effects in some cases</li>
+</ul></li>
+</ul>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<h2>OWIN Design</h2>
+
+<ul>
+<li>Servers should take action when certain elements in the environment dictionary change</li>
+<li>E.g., writing to the body stream, "owin.ResponseBody" typed as <code>System.IO.Stream</code>, flushes the headers, and you should no longer be able to write headers</li>
+<li>This design makes life difficult from the perspective of functional purity</li>
+</ul>
+
+</section>
 
 </section>
 
