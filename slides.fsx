@@ -167,7 +167,7 @@ open Swensen.Unquote
 
 ***
 
-## Pit of success
+## Enforce the pit of success
 
 ***
 
