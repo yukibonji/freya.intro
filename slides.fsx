@@ -78,12 +78,6 @@ open Swensen.Unquote
 
 ***
 
-> Afterall, if you're working against an enigma, you don't stand a chance without a machine.
-
-- [Andrei Neculau](http://hyperrest.github.io/2015-03-15-API-andropause/#content)
-
-***
-
 ## What's wrong with existing solutions?
 
 ***
@@ -138,6 +132,12 @@ open Swensen.Unquote
 ***
 
 ## Resource = defaults + overrides
+
+***
+
+> Afterall, if you're working against an enigma, you don't stand a chance without a machine.
+
+- [Andrei Neculau](http://hyperrest.github.io/2015-03-15-API-andropause/#content)
 
 ***
 
