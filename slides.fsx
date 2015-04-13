@@ -74,7 +74,7 @@ open Swensen.Unquote
 
 ***
 
-![HTTP State Machine]()
+<img src="images/http-state-diagram.png" alt="HTTP State Machine" />
 
 ***
 
@@ -113,20 +113,25 @@ open Swensen.Unquote
 
 ## Machine-style Frameworks
 
-* Webmachine (Erlang and Ruby)
-* Liberator (Clojure)
+***
+
+## [Webmachine](https://github.com/basho/webmachine/wiki)
 
 ***
 
-## Machine-style Frameworks?
+## [Liberator](http://clojure-liberator.github.io/liberator/)
 
-* Modeled as a graph, or state machine, of how to respond to a request
-* Configured by choosing to override certain aspects:
-  * decisions
-  * handlers
-  * content negotiation
-  * etc.
-* Each resource is therefore the default graph plus a set of overrides
+***
+
+## Modeled as a graph
+
+***
+
+## Declarative config via overrides
+
+***
+
+## Resource = defaults + overrides
 
 ***
 
@@ -138,50 +143,43 @@ open Swensen.Unquote
 
 ***
 
-## Architectural Principles
-
-* Stack rather than a monolithic framework
-* Building blocks for higher level abstractions
-* Compatibility with external libraries, e.g. existing OWIN middleware
+# Architectural Principles
 
 ***
 
-## "Ethical" Principles
-
-* Work with and not against existing abstractions
-* Make it easy/trivial to do the right thing
-* Use the strengths of F# to make it hard/impossible to do the wrong thing
+## Stack rather than monolithic framework
 
 ***
 
-# Todo Backend
+## Building blocks for higher-level abstractions
 
 ***
 
-## Todo Backend
-
-* A standard, simple "thing" to implement to help compare approaches
-* Inspired by TodoMVC, for comparing front-end frameworks
-* Here: http://todobackend.com/
+## Compat with external libraries
 
 ***
 
-## Demo: Todo Backend
+# "Ethical" Principles
+
+***
+
+## Work with existing abstractions
+
+***
+
+## Pit of success
+
+***
+
+## Leverage F# eliminate the wrong thing
+
+***
+
+# [Todo Backend](http://todobackend.com/)
 
 ***
 
 # Static File Server
-
-***
-
-## Static File Server
-
-* How do you approach building something using `Freya.*`?
-* Let's build a tiny little static file server and see how to extend it
-
-***
-
-## Demo: Static File Server
 
 ***
 
