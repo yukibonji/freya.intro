@@ -194,6 +194,10 @@ open Swensen.Unquote
 
 # Questions?
 
+## [@panesofglass](https://twitter.com/panesofglass)
+
+## https://github.com/panesofglass
+
 ***
 
 ## Tracing with Inspectors
