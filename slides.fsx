@@ -62,7 +62,7 @@ open Swensen.Unquote
 
 ## Contents
 
-* Problem
+* Problems
 * Solution
 * Freya
 * Examples
@@ -78,13 +78,23 @@ open Swensen.Unquote
 
 ***
 
-## What's Wrong with Existing Solutions?
+## What's wrong with existing solutions?
 
-* Syntactic sugar over a dictionary of request handlers
-* Manual response handling selection and control
-* Weak support for most of HTTP
-* Little to no enforcement of HTTP RFC requirements
-* Leads to team disagreements and other silliness
+***
+
+## Manual protocol manipulation
+
+***
+
+## Weak support for most of HTTP
+
+***
+
+## Little to no enforcement of the HTTP RFCs
+
+***
+
+## Leads to team disagreements
 
 ***
 
@@ -98,6 +108,8 @@ open Swensen.Unquote
 ***
 
 # A Better Solution
+
+***
 
 ## Machine-style Frameworks
 
@@ -140,22 +152,55 @@ open Swensen.Unquote
 * Make it easy/trivial to do the right thing
 * Use the strengths of F# to make it hard/impossible to do the wrong thing
 
+***
+
+# Todo Backend
 
 ***
 
-## Integration with existing standards
+## Todo Backend
 
-[OWIN](http://owin.org/)
+* A standard, simple "thing" to implement to help compare approaches
+* Inspired by TodoMVC, for comparing front-end frameworks
+* Here: http://todobackend.com/
 
-*)
+***
 
-Func<IDictionary<string, obj>, Task>
+## Demo: Todo Backend
 
-(**
+***
 
-* Standard contract between servers and apps/frameworks
-* Several server implementations, including IIS
-* Reasonably well followed standard
+# Static File Server
+
+***
+
+## Static File Server
+
+* How do you approach building something using `Freya.*`?
+* Let's build a tiny little static file server and see how to extend it
+
+***
+
+## Demo: Static File Server
+
+***
+
+## Next for Freya
+
+* Full release! Very soon ...
+* Inspectors / UI - in progress
+* Documentation - also very soon!
+* http://github.com/freya-fs/freya
+
+***
+
+# Questions?
+
+***
+
+## Tracing with Inspectors
+
+![Freya visual debugging](images/graph.png)
 
 ***
 
@@ -370,6 +415,22 @@ let ``pipeline executes only the first monad if first halts`` () =
 
 ***
 
+## Integration with existing standards
+
+## [OWIN](http://owin.org/)
+
+*)
+
+Func<IDictionary<string, obj>, Task>
+
+(**
+
+* Standard contract between servers and apps/frameworks
+* Several server implementations, including IIS
+* Reasonably well followed standard
+
+***
+
 ## `Freya.Router`
 
 * A simple, trie-based router, does pretty much what you'd expect
@@ -386,12 +447,6 @@ let ``pipeline executes only the first monad if first halts`` () =
 
 ***
 
-## Tracing with Inspectors
-
-![Freya visual debugging](images/graph.png)
-
-***
-
 ## `Freya.Inspector`
 
 * Built-in introspection
@@ -404,50 +459,6 @@ let ``pipeline executes only the first monad if first halts`` () =
 
 * Component-specific extensions to the inspector, currently providing component-specific JSON for the inspection API
 * Will provide UI extensions, too, but haven't decided on the best approach to that (suggestions welcome, of course)
-
-***
-
-# Todo Backend
-
-***
-
-## Todo Backend
-
-* A standard, simple "thing" to implement to help compare approaches
-* Inspired by TodoMVC, for comparing front-end frameworks
-* Here: http://todobackend.com/
-
-***
-
-## Demo: Todo Backend
-
-***
-
-# Static File Server
-
-***
-
-## Static File Server
-
-* How do you approach building something using `Freya.*`?
-* Let's build a tiny little static file server and see how to extend it
-
-***
-
-## Demo: Static File Server
-
-***
-
-## Next for Freya
-
-* Full release! Very soon ...
-* Inspectors / UI - in progress
-* Documentation - also very soon!
-* http://github.com/freya-fs/freya
-
-***
-
-# Questions?
 
 ***
 
