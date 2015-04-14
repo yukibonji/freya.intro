@@ -60,10 +60,6 @@ open Swensen.Unquote
 
 ***
 
-# Ryan Riley
-
-***
-
 <img alt="Tachyus logo" src="images/tachyus.png" height="100px" style="background-color:#fff;" />
 
 ***
