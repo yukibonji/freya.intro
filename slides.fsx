@@ -114,7 +114,13 @@ open Swensen.Unquote
 
 ***
 
-## Team disagreements and bloodshed
+## Team disagreements ...
+
+***
+
+## ... and bloodshed
+
+![There Will Be Blood](images/there-will-be-blood.png)
 
 ***
 
