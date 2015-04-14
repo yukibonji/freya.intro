@@ -114,7 +114,7 @@ open Swensen.Unquote
 
 ***
 
-## Leads to team disagreements
+## Team disagreements and bloodshed
 
 ***
 
