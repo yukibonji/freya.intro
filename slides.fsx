@@ -139,15 +139,11 @@ open Swensen.Unquote
 
 ***
 
-## [Webmachine](https://github.com/basho/webmachine/wiki)
-
-***
-
-## [Liberator](http://clojure-liberator.github.io/liberator/)
-
-***
-
 ## Modeled as a graph
+
+***
+
+![Freya visual debugging](images/graph.png)
 
 ***
 
@@ -159,9 +155,17 @@ open Swensen.Unquote
 
 ***
 
-> Afterall, if you're working against an enigma, you don't stand a chance without a machine.
+> After all, if you're working against an enigma, you don't stand a chance without a machine.
 
 - [Andrei Neculau](http://hyperrest.github.io/2015-03-15-API-andropause/#content)
+
+***
+
+## [Webmachine](https://github.com/basho/webmachine/wiki)
+
+***
+
+## [Liberator](http://clojure-liberator.github.io/liberator/)
 
 ***
 
@@ -181,6 +185,10 @@ open Swensen.Unquote
 
 ***
 
+![Freya stack](images/freya-stack.png)
+
+***
+
 ## Building blocks for higher-level abstractions
 
 ***
@@ -194,6 +202,8 @@ open Swensen.Unquote
 ***
 
 ## Work with existing abstractions
+
+(where possible)
 
 ***
 
@@ -233,10 +243,6 @@ open Swensen.Unquote
 # Freya Stack
 
 A Tour
-
-***
-
-![Freya stack](images/freya-stack.png)
 
 ***
 
