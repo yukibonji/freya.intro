@@ -60,7 +60,31 @@ open Swensen.Unquote
 
 ***
 
-## Contents
+# Ryan Riley
+
+***
+
+<img alt="Tachyus logo" src="images/tachyus.png" height="100px" style="background-color:#fff;" />
+
+***
+
+# [@panesofglass](https://twitter.com/panesofglass)
+
+***
+
+# https://github.com/panesofglass
+
+***
+
+# [OWIN](http://owin.org/)
+
+***
+
+![F# logo](images/fssf.png)
+
+***
+
+# Contents
 
 * Problems
 * Solution
@@ -181,38 +205,28 @@ open Swensen.Unquote
 
 ***
 
-# [Todo Backend](http://todobackend.com/)
+# Static File Server
 
 ***
 
-# Static File Server
+# [Todo Backend](http://todobackend.com/)
 
 ***
 
 ## Next for Freya
 
-* Full release! Very soon ...
+* https://github.com/freya-fs/freya
 * Inspectors / UI - in progress
 * Documentation - also very soon!
-* http://github.com/freya-fs/freya
+* 1.0 coming soon ...
+
+***
+
+![Freya visual debugging](images/graph.png)
 
 ***
 
 # Questions?
-
-***
-
-# Ryan Riley
-
-* [Tachyus](http://tachyus.com/)
-* [@panesofglass](https://twitter.com/panesofglass)
-* https://github.com/panesofglass
-
-***
-
-## Tracing with Inspectors
-
-![Freya visual debugging](images/graph.png)
 
 ***
 
