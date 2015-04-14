@@ -102,15 +102,15 @@ open Swensen.Unquote
 
 ***
 
-## Manual protocol manipulation
-
-***
-
 ## Weak support for most of HTTP
 
 ***
 
 ## Little to no enforcement of the HTTP RFCs
+
+***
+
+## Manual protocol manipulation
 
 ***
 
