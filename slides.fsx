@@ -232,10 +232,6 @@ open Swensen.Unquote
 
 ***
 
-![Freya visual debugging](images/graph.png)
-
-***
-
 # Questions?
 
 ***
