@@ -47,3 +47,5 @@ tools/
 gh-pages
 output
 packages
+.fake/
+FSharp.Formatting.svclog
