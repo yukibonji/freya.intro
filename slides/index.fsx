@@ -56,7 +56,7 @@ open Swensen.Unquote
 
 ***
 
-<img alt="Tachyus logo" src="images/tachyus.png" height="100px" style="background-color:#fff;" />
+<img alt="Tachyus logo" src="images/tachyus.png" style="background-color:#fff;" />
 
 ***
 
@@ -209,7 +209,7 @@ open Swensen.Unquote
 
 ***
 
-## Leverage F# eliminate the wrong thing
+## Leverage F#; eliminate the wrong thing
 
 ***
 
